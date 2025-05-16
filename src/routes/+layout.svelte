@@ -1,8 +1,26 @@
 <script>
-  
+  import { onMount, onDestroy } from 'svelte';
+
+  let shrink = false;
+  let handleScroll;
+
+  onMount(() => {
+    if (typeof window !== 'undefined') {
+      handleScroll = () => {
+        shrink = window.scrollY > 50;
+      };
+      window.addEventListener('scroll', handleScroll);
+    }
+  });
+
+  onDestroy(() => {
+    if (typeof window !== 'undefined' && handleScroll) {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  });
 </script>
 
-<header>
+<header class:shrink={shrink}>
   <nav>
     <p>Denis Popov</p>
     <div>
@@ -32,68 +50,78 @@
   }
 
   header {
-    background-color: #5da8c5; 
+    background-color: #5da8c5;
     color: white;
-    padding: 1.5rem 3rem; 
+    padding: 1.5rem 3rem;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: padding 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+
+  header.shrink {
+    padding: 0.75rem 3rem;
+    background-color: #5da8c5;
   }
 
   nav {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    width: 100%; 
-    max-width: 1200px; 
+    width: 100%;
+    max-width: 1200px;
   }
 
   nav p {
     margin: 0;
-    padding-left: 1rem; 
+    padding-left: 1rem;
     font-size: 2rem;
-    font-weight: bold;
     font-weight: 700;
   }
 
   nav div {
-    display: flex; 
-    gap: 2rem; 
+    display: flex;
+    gap: 2rem;
   }
 
   nav a {
-    position: relative; 
+    position: relative;
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
-    font-weight: bold;
     font-weight: 500;
     transition: color 0.3s ease;
   }
 
   nav a::after {
-    content: ''; 
+    content: '';
     position: absolute;
-    bottom: -5px; 
-    left: 0%; 
-    width: 0; 
-    height: 2px; 
-    background-color: white; 
-    transition: width 0.3s ease; 
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
   }
 
   nav a:hover::after {
-    width: 75%; 
+    width: 75%;
   }
 
   main {
     background: #f6f6f6;
+    /* On ajoute un padding-top pour compenser le header fixe */
+    padding-top: 120px;
   }
 
   footer {
     background-color: #5da8c5;
     color: white;
-    padding-bottom: 1.5rem;
-    padding-top: 1.5rem;
+    padding: 1.5rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
