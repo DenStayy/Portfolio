@@ -114,7 +114,6 @@
 
   main {
     background: #f6f6f6;
-    /* On ajoute un padding-top pour compenser le header fixe */
     padding-top: 120px;
   }
 
