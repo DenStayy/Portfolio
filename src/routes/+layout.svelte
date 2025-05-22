@@ -227,7 +227,7 @@
   }
 
   main {
-    padding-top: 120px;
+    padding-top: 0;
     background: #f6f6f6;
   }
 
