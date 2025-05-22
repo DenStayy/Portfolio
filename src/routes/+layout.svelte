@@ -68,7 +68,15 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 
+  :global(html, body) {
+    height: 100%;
+    margin: 0;
+  }
+
   :global(body) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0;
     font-family: "League Spartan", sans-serif;
     background-color: #f4f4f9;
@@ -227,22 +235,22 @@
   }
 
   main {
+    flex: 1;
     padding-top: 0;
     background: #f6f6f6;
   }
 
   footer {
+    margin-top: auto;
     background-color: #5da8c5;
     color: white;
     padding: 1.5rem 0;
     text-align: center;
-    position: static;
-    bottom: 0; left: 0; width: 100%;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
   }
-  footer p { 
-    margin: 0; 
-    font-size: 1.25rem; 
+  footer p {
+    margin: 0;
+    font-size: 1.25rem;
   }
 
   @media (max-width: 768px) {
